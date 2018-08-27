@@ -16,6 +16,7 @@ def find_more_url(url):
 
 
 def get_url_info(url):
+    filename = "item_url.txt"
     response = requests.get(url)
 
     # print(response.text)
@@ -26,11 +27,15 @@ def get_url_info(url):
     for item in temp:
         if("http://ragial.org/item/iRO-Renewal/" in item):
             print(item)
-
-            write_file("item_url.txt", item+"\n")
+            # if(check_file(filename, item)):
+            write_file(filename, item+"\n")
 
 def check_file(filename, info):
-    
+    file = open(filename,'r')
+    if(info in file.read()):
+        return True
+    else:
+        return False
 
 def write_file(filename, info):
     file = codecs.open(filename, 'a')
